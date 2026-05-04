@@ -4,7 +4,14 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import pandas as pd
 import joblib
+import logging
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logger = logging.getLogger(__name__)
 # -----------------------
 # FastAPI Setup
 # -----------------------
@@ -58,6 +65,14 @@ class CustomerData(BaseModel):
 # Feature Engineering
 # -----------------------
 
+def get_risk_level(prob):
+    if prob >= 0.7:
+        return "High"
+    elif prob >= 0.4:
+        return "Medium"
+    else:
+        return "Low"
+
 def create_tenure_group(tenure):
     if tenure <= 9:
         return "Q1"
@@ -82,6 +97,9 @@ def predict(customer: CustomerData):
 
     # Convert to dataframe
     df = pd.DataFrame([data])
+
+    #reciving loger info
+    logger.info(f"Received input: {data}")
 
     # Force exact column order
     expected_columns = [
@@ -109,6 +127,13 @@ def predict(customer: CustomerData):
 
     df = df[expected_columns]
 
+     # TRY-CATCH HERE
+    try:
+        prob = model.predict_proba(df)[0][1]
+    except Exception as e:
+        logger.error(f"Prediction failed: {str(e)}")
+        raise e
+
     # Predict probability
     prob = model.predict_proba(df)[0][1]
 
@@ -116,7 +141,12 @@ def predict(customer: CustomerData):
 
     prediction = "Yes" if prob >= threshold else "No"
 
+    risk = get_risk_level(prob)
+
+    logger.info(f"Prediction: {prediction}, Prob: {prob}, Risk: {risk}")
+
     return {
         "prediction": prediction,
-        "probability": round(float(prob), 4)
+        "probability": round(float(prob), 4),
+        "risk_level": risk
     }

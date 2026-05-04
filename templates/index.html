@@ -211,7 +211,7 @@ body: JSON.stringify(payload)
 
 const data = await res.json();
 document.getElementById("result").innerText =
-"Prediction: " + data.prediction + " | Prob: " + data.probability;
+"Prediction: " + data.prediction + " | Prob: " + data.probability + " | Risk: " + data.risk_level;
 
 });
 </script>
