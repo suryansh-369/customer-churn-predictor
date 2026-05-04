@@ -5,8 +5,8 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: Arial;
+            background: #f4f4f4;
             padding: 40px;
         }
 
@@ -14,62 +14,35 @@
             width: 500px;
             margin: auto;
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
         }
 
         label {
             font-weight: bold;
-            display: block;
             margin-top: 10px;
+            display: block;
         }
 
-        input {
+        select, input {
             width: 100%;
             padding: 8px;
             margin-top: 4px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
         }
 
         button {
-            width: 100%;
-            padding: 12px;
             margin-top: 20px;
-            background-color: #007bff;
+            padding: 12px;
+            width: 100%;
+            background: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
         }
 
         #result {
             margin-top: 20px;
-            font-size: 20px;
             font-weight: bold;
             text-align: center;
-        }
-
-        .loading {
-            color: orange;
-        }
-
-        .success {
-            color: green;
-        }
-
-        .error {
-            color: red;
         }
     </style>
 </head>
@@ -78,143 +51,169 @@
 
 <div class="container">
 
-    <h1>Customer Churn Predictor</h1>
+<h2>Customer Churn Predictor</h2>
 
-    <form id="predictForm">
+<form id="predictForm">
 
-        <label>Gender</label>
-        <input type="text" id="gender" placeholder="Male or Female">
+<label>Gender</label>
+<select id="gender">
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+</select>
 
-        <label>Senior Citizen</label>
-        <input type="number" id="SeniorCitizen" placeholder="0 = No, 1 = Yes">
+<label>Senior Citizen</label>
+<input type="number" id="SeniorCitizen">
 
-        <label>Partner</label>
-        <input type="text" id="Partner" placeholder="Yes or No">
+<label>Partner</label>
+<select id="Partner">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
 
-        <label>Dependents</label>
-        <input type="text" id="Dependents" placeholder="Yes or No">
+<label>Dependents</label>
+<select id="Dependents">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
 
-        <label>Tenure (Months)</label>
-        <input type="number" id="tenure" placeholder="Months">
+<label>Tenure</label>
+<input type="number" id="tenure">
 
-        <label>Phone Service</label>
-        <input type="text" id="PhoneService" placeholder="Yes or No">
+<label>Phone Service</label>
+<select id="PhoneService">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
 
-        <label>Multiple Lines</label>
-        <input type="text" id="MultipleLines" placeholder="Yes or No">
+<label>Multiple Lines</label>
+<select id="MultipleLines">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+<option value="No phone service">No phone service</option>
+</select>
 
-        <label>Internet Service</label>
-        <input type="text" id="InternetService" placeholder="DSL / Fiber optic / No">
+<label>Internet Service</label>
+<select id="InternetService">
+<option value="DSL">DSL</option>
+<option value="Fiber optic">Fiber optic</option>
+<option value="No">No</option>
+</select>
 
-        <label>Online Security</label>
-        <input type="text" id="OnlineSecurity" placeholder="Yes or No">
+<label>Online Security</label>
+<select id="OnlineSecurity">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+<option value="No internet service">No internet service</option>
+</select>
 
-        <label>Online Backup</label>
-        <input type="text" id="OnlineBackup" placeholder="Yes or No">
+<label>Online Backup</label>
+<select id="OnlineBackup">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+<option value="No internet service">No internet service</option>
+</select>
 
-        <label>Device Protection</label>
-        <input type="text" id="DeviceProtection" placeholder="Yes or No">
+<label>Device Protection</label>
+<select id="DeviceProtection">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+<option value="No internet service">No internet service</option>
+</select>
 
-        <label>Tech Support</label>
-        <input type="text" id="TechSupport" placeholder="Yes or No">
+<label>Tech Support</label>
+<select id="TechSupport">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+<option value="No internet service">No internet service</option>
+</select>
 
-        <label>Streaming TV</label>
-        <input type="text" id="StreamingTV" placeholder="Yes or No">
+<label>Streaming TV</label>
+<select id="StreamingTV">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+<option value="No internet service">No internet service</option>
+</select>
 
-        <label>Streaming Movies</label>
-        <input type="text" id="StreamingMovies" placeholder="Yes or No">
+<label>Streaming Movies</label>
+<select id="StreamingMovies">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+<option value="No internet service">No internet service</option>
+</select>
 
-        <label>Contract</label>
-        <input type="text" id="Contract" placeholder="Month-to-month / One year / Two year">
+<label>Contract</label>
+<select id="Contract">
+<option value="Month-to-month">Month-to-month</option>
+<option value="One year">One year</option>
+<option value="Two year">Two year</option>
+</select>
 
-        <label>Paperless Billing</label>
-        <input type="text" id="PaperlessBilling" placeholder="Yes or No">
+<label>Paperless Billing</label>
+<select id="PaperlessBilling">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
 
-        <label>Payment Method</label>
-        <input type="text" id="PaymentMethod" placeholder="Electronic check">
+<label>Payment Method</label>
+<select id="PaymentMethod">
+<option value="Electronic check">Electronic check</option>
+<option value="Mailed check">Mailed check</option>
+<option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+<option value="Credit card (automatic)">Credit card (automatic)</option>
+</select>
 
-        <label>Monthly Charges</label>
-        <input type="number" step="0.01" id="MonthlyCharges">
+<label>Monthly Charges</label>
+<input type="number" step="0.01" id="MonthlyCharges">
 
-        <label>Total Charges</label>
-        <input type="number" step="0.01" id="TotalCharges">
+<label>Total Charges</label>
+<input type="number" step="0.01" id="TotalCharges">
 
-        <button type="submit">Predict Churn</button>
+<button type="submit">Predict</button>
 
-    </form>
+</form>
 
-    <div id="result"></div>
+<div id="result"></div>
 
 </div>
 
 <script>
-
 document.getElementById("predictForm").addEventListener("submit", async function(e){
 
-    e.preventDefault();
+e.preventDefault();
 
-    const resultBox = document.getElementById("result");
+const payload = {
+gender: document.getElementById("gender").value,
+SeniorCitizen: parseInt(document.getElementById("SeniorCitizen").value),
+Partner: document.getElementById("Partner").value,
+Dependents: document.getElementById("Dependents").value,
+tenure: parseInt(document.getElementById("tenure").value),
+PhoneService: document.getElementById("PhoneService").value,
+MultipleLines: document.getElementById("MultipleLines").value,
+InternetService: document.getElementById("InternetService").value,
+OnlineSecurity: document.getElementById("OnlineSecurity").value,
+OnlineBackup: document.getElementById("OnlineBackup").value,
+DeviceProtection: document.getElementById("DeviceProtection").value,
+TechSupport: document.getElementById("TechSupport").value,
+StreamingTV: document.getElementById("StreamingTV").value,
+StreamingMovies: document.getElementById("StreamingMovies").value,
+Contract: document.getElementById("Contract").value,
+PaperlessBilling: document.getElementById("PaperlessBilling").value,
+PaymentMethod: document.getElementById("PaymentMethod").value,
+MonthlyCharges: parseFloat(document.getElementById("MonthlyCharges").value),
+TotalCharges: parseFloat(document.getElementById("TotalCharges").value)
+};
 
-    resultBox.className = "loading";
-    resultBox.innerText = "Predicting...";
-
-    const payload = {
-
-        gender: document.getElementById("gender").value,
-        SeniorCitizen: parseInt(document.getElementById("SeniorCitizen").value),
-        Partner: document.getElementById("Partner").value,
-        Dependents: document.getElementById("Dependents").value,
-        tenure: parseInt(document.getElementById("tenure").value),
-        PhoneService: document.getElementById("PhoneService").value,
-        MultipleLines: document.getElementById("MultipleLines").value,
-        InternetService: document.getElementById("InternetService").value,
-        OnlineSecurity: document.getElementById("OnlineSecurity").value,
-        OnlineBackup: document.getElementById("OnlineBackup").value,
-        DeviceProtection: document.getElementById("DeviceProtection").value,
-        TechSupport: document.getElementById("TechSupport").value,
-        StreamingTV: document.getElementById("StreamingTV").value,
-        StreamingMovies: document.getElementById("StreamingMovies").value,
-        Contract: document.getElementById("Contract").value,
-        PaperlessBilling: document.getElementById("PaperlessBilling").value,
-        PaymentMethod: document.getElementById("PaymentMethod").value,
-        MonthlyCharges: parseFloat(document.getElementById("MonthlyCharges").value),
-        TotalCharges: parseFloat(document.getElementById("TotalCharges").value)
-
-    };
-
-    console.log("Payload Sent:", payload);
-
-    try {
-
-        const response = await fetch("/predict", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-
-        const data = await response.json();
-
-        console.log("API Response:", data);
-
-        resultBox.className = "success";
-
-        resultBox.innerText =
-            "Prediction: " + data.prediction +
-            " | Probability: " + data.probability;
-
-    } catch(error) {
-
-        console.log(error);
-
-        resultBox.className = "error";
-        resultBox.innerText = "Error connecting to API";
-
-    }
-
+const res = await fetch("/predict", {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify(payload)
 });
 
+const data = await res.json();
+document.getElementById("result").innerText =
+"Prediction: " + data.prediction + " | Prob: " + data.probability;
+
+});
 </script>
 
 </body>
